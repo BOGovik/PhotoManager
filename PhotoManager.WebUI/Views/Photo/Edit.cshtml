@@ -1,0 +1,48 @@
+﻿@model PhotoManager.Domain.Entities.Photo
+
+@{
+    ViewBag.Title = "Edit photo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="panel">
+        <div class="panel-heading">
+            <h3>Edit photo «@Model.Name»</h3>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            <div class="panel-body">
+                @Html.HiddenFor(m => m.PhotoId)
+                @foreach (var property in ViewData.ModelMetadata.Properties)
+                {
+                    if (property.PropertyName != "PhotoId")
+                    {
+                <div class="form-group">
+                    <label>@(property.DisplayName ?? property.PropertyName)</label>
+                    @if (property.PropertyName == "Description")
+                    {
+                        @Html.TextArea(property.PropertyName, null,
+                            new { @class = "form-control", rows = 5 })
+                    }
+                    else
+                    {
+                        @Html.TextBox(property.PropertyName, null,
+                            new { @class = "form-control" })
+                    }
+
+                </div>
+                    }
+                }
+            </div>
+            <div class="panel-footer">
+                <input type="submit" value="Save" class="btn btn-outline-success" />
+                @Html.ActionLink("Cancel and return to the list", "List", null, new
+           {
+               @class = "btn btn-outline-secondary"
+           })
+            </div>
+            <hr />
+        }
+    </div>
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<string>
+
+@Html.ActionLink("Add photo", "Create", "Photo", null, new { @class = "btn btn-block btn-primary" })
+
+
+<br />
+
+<p>
+    <button class="btn btn-block btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Choose album
+    </button>
+</p>
+
+
+<div class="collapse" id="collapseExample">
+
+    @Html.ActionLink("All photos", "List", "Photo", null, new { @class = "btn btn-block btn-default " })
+
+    @foreach (var link in Model)
+    {
+        @Html.RouteLink(link, new
+    {
+       controller = "Photo",
+       action = "List",
+       category = link,
+       page = 1
+    }, new
+    {
+       @class = "btn btn-block btn-default "
+                     + (link == ViewBag.SelectedCategory ? " btn-primary" : "")
+    })
+    }
+</div>
+<br />
+@Html.ActionLink("Manage", "Create", "Photo", null, new { @class = "btn btn-block btn-primary" })
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+<script language="javascript" type="text/javascript">
+    function retainDivCollapsedState(nameOfDiv, nameOfHeader) {
+        // when the div is shown, save a cookie with a value of 'true'
+        $("#" + nameOfDiv).on('shown.bs.collapse', function () {
+            $.cookie(nameOfDiv, "true"); // this is a cookie.  named the same as the control (poor practice) for brevity
+        });
+        // when the div is collapsed, remove the same cookie
+        $("#" + nameOfDiv).on('hidden.bs.collapse', function () {
+            $.removeCookie(nameOfDiv);
+        });
+
+        // on page load, show or hide the div (and stylized the header) according to the cookie (if it exists)
+        var showDiv = $.cookie(nameOfDiv);
+        if (showDiv != null) {
+            $("#" + nameOfDiv).addClass("in");                      // The div to show
+            $("#" + nameOfHeader).removeClass("collapsed");         // The header to stylize as expanded
+        }
+    };
+</script>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(
+        retainDivCollapsedState("divName", "divHeaderName")
+    );
+</script>
