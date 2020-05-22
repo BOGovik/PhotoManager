@@ -11,5 +11,6 @@ namespace PhotoManager.Domain.Abstract
     {
         IEnumerable<Photo> Photos { get; }
         void SavePhoto(Photo photo);
+        Photo DeletePhoto(int photoId);
     }
 }

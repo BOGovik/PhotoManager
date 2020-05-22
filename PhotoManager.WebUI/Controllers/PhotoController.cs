@@ -19,6 +19,7 @@ namespace PhotoManager.WebUI.Controllers
             repository = repo;
         }
 
+        
         public ViewResult List(string category, int page = 1)
         {
             PhotosListViewModel model = new PhotosListViewModel
@@ -41,11 +42,13 @@ namespace PhotoManager.WebUI.Controllers
             return View(model);
         }
 
+        // Вывод списка всех фото
         public ViewResult Index()
         {
             return View(repository.Photos);
         }
 
+        // Редактирование фото
         public ViewResult Edit(int photoId)
         {
             Photo photo = repository.Photos
@@ -69,6 +72,7 @@ namespace PhotoManager.WebUI.Controllers
             }
         }
 
+        // Добавление фото
         public ViewResult Create()
         {
             return View("Create", new Photo());
@@ -87,6 +91,19 @@ namespace PhotoManager.WebUI.Controllers
                 // Что-то не так со значениями данных
                 return View(photo);
             }
+        }
+
+        // Удаление фото
+        [HttpPost]
+        public ActionResult Delete(int photoId)
+        {
+            Photo deletedPhoto = repository.DeletePhoto(photoId);
+            if (deletedPhoto != null)
+            {
+                TempData["message"] = string.Format("\"{0}\" has been deleted",
+                    deletedPhoto.Name);
+            }
+            return RedirectToAction("List");
         }
     }
 

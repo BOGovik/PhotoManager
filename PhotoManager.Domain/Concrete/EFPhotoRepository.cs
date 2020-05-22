@@ -33,5 +33,16 @@ namespace PhotoManager.Domain.Concrete
             }
             context.SaveChanges();
         }
+
+        public Photo DeletePhoto(int photoId)
+        {
+            Photo dbEntry = context.Photos.Find(photoId);
+            if (dbEntry != null)
+            {
+                context.Photos.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

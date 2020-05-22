@@ -337,5 +337,33 @@ namespace PhotoManager.UnitTests
             // Утверждение - проверка типа результата метода
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        [TestMethod]
+        public void Can_Delete_Valid_Photos()
+        {
+            // Организация - создание объекта Фото
+            Photo photo = new Photo { PhotoId = 2, Name = "Фото2" };
+
+            // Организация - создание имитированного хранилища данных
+            Mock<IPhotoRepository> mock = new Mock<IPhotoRepository>();
+            mock.Setup(m => m.Photos).Returns(new List<Photo>
+    {
+                    new Photo { PhotoId = 1, Name = "Фото1"},
+                    new Photo { PhotoId = 2, Name = "Фото2"},
+                    new Photo { PhotoId = 3, Name = "Фото3"},
+                    new Photo { PhotoId = 4, Name = "Фото4"},
+                    new Photo { PhotoId = 5, Name = "Фото5"}
+    });
+
+            // Организация - создание контроллера
+            PhotoController controller = new PhotoController(mock.Object);
+
+            // Действие - удаление фото
+            controller.Delete(photo.PhotoId);
+
+            // Утверждение - проверка того, что метод удаления в хранилище
+            // вызывается для корректного объекта Фото
+            mock.Verify(m => m.DeletePhoto(photo.PhotoId));
+        }
     }
 }

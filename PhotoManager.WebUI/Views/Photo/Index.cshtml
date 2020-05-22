@@ -16,29 +16,30 @@
                     <th class="text-right">ID</th>
                     <th>Name</th>
                     <th class="text-right">Description</th>
+                    <th class="text-right">Album</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td class="text-right">@item.PhotoId</td>
-                        <td>@Html.ActionLink(item.Name, "Edit", new { item.PhotoId })</td>
-                        <td class="text-right">@item.Description</td>
-                        <td class="text-center">
-                            @using (Html.BeginForm("Delete", "Admin"))
-                            {
-                                @Html.Hidden("GameId", item.PhotoId)
-                                <input type="submit"
-                                       class="btn btn-default btn-xs"
-                                       value="Удалить" />
-                            }
-                        </td>
-                    </tr>
+            <tr>
+                <td class="text-right">@item.PhotoId</td>
+                <td>@Html.ActionLink(item.Name, "Edit", new { item.PhotoId })</td>
+                <td class="text-right">@item.Description</td>
+                <td class="text-right">@item.Category</td>
+                <td class="text-center">
+                    @using (Html.BeginForm("Delete", "Photo"))
+                    {
+                        @Html.Hidden("PhotoId", item.PhotoId)
+                        <input type="submit"
+                               class="btn btn-outline-danger"
+                               value="Удалить" />
+                    }
+                </td>
+            </tr>
                 }
             </table>
         </div>
         <div class="panel-footer">
-            @Html.ActionLink("Добавить фото", "Create", null,
-                new { @class = "btn btn-default" })
+            @Html.ActionLink("Add photo", "Create", "Photo", null, new { @class = "btn btn-block btn-primary" })
         </div>
     </div>
