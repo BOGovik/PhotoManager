@@ -29,6 +29,15 @@ namespace PhotoManager.Domain.Concrete
                     dbEntry.Name = photo.Name;
                     dbEntry.Description = photo.Description;
                     dbEntry.Category = photo.Category;
+                    dbEntry.ImageData = photo.ImageData;
+                    dbEntry.ImageMimeType = photo.ImageMimeType;
+                    dbEntry.Place = photo.Place;
+                    dbEntry.Camera = photo.Camera;
+                    dbEntry.FocalLength = photo.FocalLength;
+                    dbEntry.Diaphragm = photo.Diaphragm;
+                    dbEntry.CameraLockSpeed = photo.CameraLockSpeed;
+                    dbEntry.ISO = photo.ISO;
+                    dbEntry.UserId = photo.UserId;
                 }
             }
             context.SaveChanges();
