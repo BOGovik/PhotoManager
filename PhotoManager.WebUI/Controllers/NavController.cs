@@ -24,7 +24,7 @@ namespace PhotoManager.WebUI.Controllers
                 .Select(photo => photo.Category)
                 .Distinct()
                 .OrderBy(x => x);
-            return PartialView(categories);
+            return PartialView("Menu", categories);
         }
     }
 }

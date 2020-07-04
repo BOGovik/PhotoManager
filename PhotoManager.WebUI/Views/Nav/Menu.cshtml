@@ -32,7 +32,19 @@
     }
 </div>
 
-@Html.ActionLink("Manage", "Create", "Photo", null, new { @class = "btn btn-block btn-primary" })
+<p>
+    <button class="btn btn-block btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+        Manage
+    </button>
+</p>
+
+<div class="collapse" id="collapseExample2">
+
+    @Html.ActionLink("Photos", "Index", "Photo", null, new { @class = "btn btn-block btn-default" })
+    @Html.ActionLink("Albums", "Create", "Photo", null, new { @class = "btn btn-block btn-default" })
+</div>
+
+
 
 
 

@@ -60,21 +60,21 @@
     @* Body *@
     @if (Request.IsAuthenticated)
     {
-<div class="row panel">
-    <div class="col-md-1">
+        <div class="row panel">
+            <div class="col-md-1">
 
-    </div>
-    <div id="categories" class="col-md-1">
-        @Html.Action("Menu", "Nav")
-    </div>
-    <div class="col-md-8">
-        @if (TempData["message"] != null)
-        {
-            <div class="alert alert-success">@TempData["message"]</div>
-        }
-        @RenderBody()
-    </div>
-</div>
+            </div>
+            <div id="categories" class="col-md-1">
+                @Html.Action("Menu", "Nav")
+            </div>
+            <div class="col-md-8">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-success">@TempData["message"]</div>
+                }
+                @RenderBody()
+            </div>
+        </div>
     }
     else
     {
@@ -99,6 +99,7 @@
     @RenderSection("scripts", required: false)
 
 
+
+
 </body>
 </html>
-

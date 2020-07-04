@@ -17,7 +17,7 @@ namespace PhotoManager.UnitTests
         [TestMethod]
         public void Can_Retrieve_Image_Data()
         {
-            // Организация - создание объекта Game с данными изображения
+            // Организация - создание объекта Photo с данными изображения
             Photo photo = new Photo
             {
                 PhotoId = 2,
